@@ -11,12 +11,20 @@ config_version=5
 [application]
 
 config/name="The Game"
-config/features=PackedStringArray("4.6", "Double Precision", "Forward Plus")
+run/main_scene="uid://xdx8qdpqusv1"
+config/features=PackedStringArray("4.6", "C#", "Double Precision", "Forward Plus")
 config/icon="res://icon.svg"
+
+[dotnet]
+
+project/assembly_name="The Game"
 
 [physics]
 
 3d/physics_engine="Jolt Physics"
+2d/default_gravity=0.0
+2d/default_linear_damp=0.0
+2d/default_angular_damp=0.0
 
 [rendering]
 
