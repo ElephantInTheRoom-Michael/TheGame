@@ -2,6 +2,7 @@
 
 [ext_resource type="Script" uid="uid://c0khytb01keo7" path="res://LocationComputer.cs" id="1_elp3y"]
 [ext_resource type="Script" uid="uid://gtpduxu7mp1w" path="res://TerminalComputer.cs" id="1_w5r8j"]
+[ext_resource type="Script" uid="uid://c3npbykcyddtb" path="res://RcsComputer.cs" id="3_3qy4n"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_yp4n1"]
 size = Vector2(50, 50)
@@ -24,14 +25,24 @@ shape = SubResource("RectangleShape2D_yp4n1")
 script = ExtResource("1_w5r8j")
 _output = NodePath("../../CanvasLayer/VBoxContainer/PanelContainer/RichTextLabel")
 
-[node name="LocationComputer" type="Node2D" parent="Ship" unique_id=1068400681]
+[node name="LocationComputer" type="Node2D" parent="Ship" unique_id=1068400681 node_paths=PackedStringArray("_ship")]
 script = ExtResource("1_elp3y")
+_ship = NodePath("..")
 
 [node name="Polygon2D" type="Polygon2D" parent="Ship/LocationComputer" unique_id=454173010]
 color = Color(1, 0, 1, 1)
 polygon = PackedVector2Array(0, 0, 5, 15, -5, 15)
 
 [node name="Timer" type="Timer" parent="Ship/LocationComputer" unique_id=1747387579]
+autostart = true
+
+[node name="RcsComputer" type="Node2D" parent="Ship" unique_id=717340213 node_paths=PackedStringArray("_ship")]
+script = ExtResource("3_3qy4n")
+_ship = NodePath("..")
+
+[node name="StartHoldingProgradeTimer" type="Timer" parent="Ship/RcsComputer" unique_id=194398996]
+wait_time = 5.0
+one_shot = true
 autostart = true
 
 [node name="CanvasLayer" type="CanvasLayer" parent="." unique_id=1091152427]
@@ -68,4 +79,6 @@ vertical_alignment = 2
 layout_mode = 2
 
 [connection signal="Location" from="Ship/LocationComputer" to="Ship/TerminalComputer" method="OnDataInput"]
+[connection signal="VelocityDirection" from="Ship/LocationComputer" to="Ship/RcsComputer" method="OnVelocityDirectionReceived"]
 [connection signal="timeout" from="Ship/LocationComputer/Timer" to="Ship/LocationComputer" method="OnTimerTimeout"]
+[connection signal="timeout" from="Ship/RcsComputer/StartHoldingProgradeTimer" to="Ship/RcsComputer" method="HoldPrograde"]
