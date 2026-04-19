@@ -1,0 +1,9 @@
+[gd_scene format=3 uid="uid://clh3c41tmmxw3"]
+
+[node name="ModifiedLight" type="Panel" unique_id=1229390156]
+custom_minimum_size = Vector2(30, 40)
+offset_right = 30.0
+offset_bottom = 40.0
+
+[node name="Polygon2D" type="Polygon2D" parent="." unique_id=457697915]
+polygon = PackedVector2Array(15, 0, 30, 40, 0, 40)

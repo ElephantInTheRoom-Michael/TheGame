@@ -1,0 +1,278 @@
+[gd_scene format=3 uid="uid://cmx0y12gv6j71"]
+
+[ext_resource type="PackedScene" uid="uid://jt4ef4d6pox0" path="res://parts/interfaces/dsky/seven_segment.tscn" id="1_k8x3g"]
+[ext_resource type="PackedScene" uid="uid://bkr713b0bdbe3" path="res://parts/interfaces/dsky/plus_minus.tscn" id="2_q7m15"]
+[ext_resource type="PackedScene" uid="uid://clh3c41tmmxw3" path="res://parts/interfaces/dsky/modified_light.tscn" id="3_hfqs4"]
+
+[node name="DskyInterface" type="CanvasLayer" unique_id=1410098241]
+
+[node name="HBoxContainer" type="HBoxContainer" parent="." unique_id=63330487]
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -598.0
+offset_bottom = 260.0
+grow_horizontal = 0
+theme_override_constants/separation = 32
+
+[node name="ButtonGrid" type="GridContainer" parent="HBoxContainer" unique_id=1042021927]
+layout_mode = 2
+columns = 4
+
+[node name="ErrorButton" type="Button" parent="HBoxContainer/ButtonGrid" unique_id=2074576436]
+custom_minimum_size = Vector2(80, 40)
+layout_mode = 2
+text = "Error"
+
+[node name="ResetButton" type="Button" parent="HBoxContainer/ButtonGrid" unique_id=1094511242]
+custom_minimum_size = Vector2(80, 40)
+layout_mode = 2
+text = "Reset"
+
+[node name="TargetButton" type="Button" parent="HBoxContainer/ButtonGrid" unique_id=1052514329]
+custom_minimum_size = Vector2(80, 40)
+layout_mode = 2
+text = "Target"
+
+[node name="ProgramButton" type="Button" parent="HBoxContainer/ButtonGrid" unique_id=1300119290]
+custom_minimum_size = Vector2(80, 40)
+layout_mode = 2
+text = "Prog"
+
+[node name="RevertButton" type="Button" parent="HBoxContainer/ButtonGrid" unique_id=37533276]
+custom_minimum_size = Vector2(80, 40)
+layout_mode = 2
+text = "Revert
+"
+
+[node name="ClearButton" type="Button" parent="HBoxContainer/ButtonGrid" unique_id=332094707]
+custom_minimum_size = Vector2(80, 40)
+layout_mode = 2
+text = "Clear"
+
+[node name="VerbButton" type="Button" parent="HBoxContainer/ButtonGrid" unique_id=1856131399]
+custom_minimum_size = Vector2(80, 40)
+layout_mode = 2
+text = "Verb"
+
+[node name="NounButton" type="Button" parent="HBoxContainer/ButtonGrid" unique_id=71379819]
+custom_minimum_size = Vector2(80, 40)
+layout_mode = 2
+text = "Noun"
+
+[node name="Button7" type="Button" parent="HBoxContainer/ButtonGrid" unique_id=1303367379]
+custom_minimum_size = Vector2(80, 40)
+layout_mode = 2
+text = "7"
+
+[node name="Button8" type="Button" parent="HBoxContainer/ButtonGrid" unique_id=1862887428]
+custom_minimum_size = Vector2(80, 40)
+layout_mode = 2
+text = "8"
+
+[node name="Button9" type="Button" parent="HBoxContainer/ButtonGrid" unique_id=1705108087]
+custom_minimum_size = Vector2(80, 40)
+layout_mode = 2
+text = "9"
+
+[node name="LineButton1" type="Button" parent="HBoxContainer/ButtonGrid" unique_id=556510783]
+custom_minimum_size = Vector2(80, 40)
+layout_mode = 2
+text = "-->"
+
+[node name="Button4" type="Button" parent="HBoxContainer/ButtonGrid" unique_id=774256379]
+custom_minimum_size = Vector2(80, 40)
+layout_mode = 2
+text = "4"
+
+[node name="Button5" type="Button" parent="HBoxContainer/ButtonGrid" unique_id=1076861011]
+custom_minimum_size = Vector2(80, 40)
+layout_mode = 2
+text = "5"
+
+[node name="Button6" type="Button" parent="HBoxContainer/ButtonGrid" unique_id=1284715583]
+custom_minimum_size = Vector2(80, 40)
+layout_mode = 2
+text = "6"
+
+[node name="LineButton2" type="Button" parent="HBoxContainer/ButtonGrid" unique_id=1864221093]
+custom_minimum_size = Vector2(80, 40)
+layout_mode = 2
+text = "-->"
+
+[node name="Button1" type="Button" parent="HBoxContainer/ButtonGrid" unique_id=933608258]
+custom_minimum_size = Vector2(80, 40)
+layout_mode = 2
+text = "1"
+
+[node name="Button2" type="Button" parent="HBoxContainer/ButtonGrid" unique_id=945173050]
+custom_minimum_size = Vector2(80, 40)
+layout_mode = 2
+text = "2"
+
+[node name="Button3" type="Button" parent="HBoxContainer/ButtonGrid" unique_id=1084401737]
+custom_minimum_size = Vector2(80, 40)
+layout_mode = 2
+text = "3"
+
+[node name="LineButton3" type="Button" parent="HBoxContainer/ButtonGrid" unique_id=443636900]
+custom_minimum_size = Vector2(80, 40)
+layout_mode = 2
+text = "-->"
+
+[node name="PlusButton" type="Button" parent="HBoxContainer/ButtonGrid" unique_id=804837751]
+custom_minimum_size = Vector2(80, 40)
+layout_mode = 2
+text = "+"
+
+[node name="Button0" type="Button" parent="HBoxContainer/ButtonGrid" unique_id=1365965059]
+custom_minimum_size = Vector2(80, 40)
+layout_mode = 2
+text = "0"
+
+[node name="MinusButton" type="Button" parent="HBoxContainer/ButtonGrid" unique_id=537731578]
+custom_minimum_size = Vector2(80, 40)
+layout_mode = 2
+text = "-"
+
+[node name="CommitButton" type="Button" parent="HBoxContainer/ButtonGrid" unique_id=965175535]
+custom_minimum_size = Vector2(80, 40)
+layout_mode = 2
+text = "Commit
+"
+
+[node name="DisplayGrid" type="GridContainer" parent="HBoxContainer" unique_id=1753692042]
+layout_mode = 2
+columns = 7
+
+[node name="TargetSevenSegment1" parent="HBoxContainer/DisplayGrid" unique_id=515280271 instance=ExtResource("1_k8x3g")]
+layout_mode = 2
+
+[node name="TargetSevenSegment2" parent="HBoxContainer/DisplayGrid" unique_id=221433448 instance=ExtResource("1_k8x3g")]
+layout_mode = 2
+
+[node name="TargetSevenSegment3" parent="HBoxContainer/DisplayGrid" unique_id=1602757066 instance=ExtResource("1_k8x3g")]
+layout_mode = 2
+
+[node name="Blank1" type="PanelContainer" parent="HBoxContainer/DisplayGrid" unique_id=132723060]
+custom_minimum_size = Vector2(30, 40)
+layout_mode = 2
+
+[node name="ProgramSevenSegment1" parent="HBoxContainer/DisplayGrid" unique_id=596408736 instance=ExtResource("1_k8x3g")]
+layout_mode = 2
+
+[node name="ProgramSevenSegment2" parent="HBoxContainer/DisplayGrid" unique_id=2087787399 instance=ExtResource("1_k8x3g")]
+layout_mode = 2
+
+[node name="ProgramSevenSegment3" parent="HBoxContainer/DisplayGrid" unique_id=1386446445 instance=ExtResource("1_k8x3g")]
+layout_mode = 2
+
+[node name="VerbSevenSegment1" parent="HBoxContainer/DisplayGrid" unique_id=146723378 instance=ExtResource("1_k8x3g")]
+layout_mode = 2
+
+[node name="VerbSevenSegment2" parent="HBoxContainer/DisplayGrid" unique_id=1922081736 instance=ExtResource("1_k8x3g")]
+layout_mode = 2
+
+[node name="VerbSevenSegment3" parent="HBoxContainer/DisplayGrid" unique_id=321779225 instance=ExtResource("1_k8x3g")]
+layout_mode = 2
+
+[node name="Blank2" type="PanelContainer" parent="HBoxContainer/DisplayGrid" unique_id=927823760]
+custom_minimum_size = Vector2(30, 40)
+layout_mode = 2
+
+[node name="NounSevenSegment1" parent="HBoxContainer/DisplayGrid" unique_id=1290880397 instance=ExtResource("1_k8x3g")]
+layout_mode = 2
+
+[node name="NounSevenSegment2" parent="HBoxContainer/DisplayGrid" unique_id=1710852124 instance=ExtResource("1_k8x3g")]
+layout_mode = 2
+
+[node name="NounSevenSegment3" parent="HBoxContainer/DisplayGrid" unique_id=808082041 instance=ExtResource("1_k8x3g")]
+layout_mode = 2
+
+[node name="Data1PlusMinus" parent="HBoxContainer/DisplayGrid" unique_id=2040494475 instance=ExtResource("2_q7m15")]
+layout_mode = 2
+
+[node name="Data1SevenSegment1" parent="HBoxContainer/DisplayGrid" unique_id=1919656479 instance=ExtResource("1_k8x3g")]
+layout_mode = 2
+
+[node name="Data1SevenSegment2" parent="HBoxContainer/DisplayGrid" unique_id=2095233360 instance=ExtResource("1_k8x3g")]
+layout_mode = 2
+
+[node name="Data1SevenSegment3" parent="HBoxContainer/DisplayGrid" unique_id=1543648217 instance=ExtResource("1_k8x3g")]
+layout_mode = 2
+
+[node name="Data1SevenSegment4" parent="HBoxContainer/DisplayGrid" unique_id=182735542 instance=ExtResource("1_k8x3g")]
+layout_mode = 2
+
+[node name="Data1SevenSegment5" parent="HBoxContainer/DisplayGrid" unique_id=1331601662 instance=ExtResource("1_k8x3g")]
+layout_mode = 2
+
+[node name="Data1SevenSegment6" parent="HBoxContainer/DisplayGrid" unique_id=631743880 instance=ExtResource("1_k8x3g")]
+layout_mode = 2
+
+[node name="Data2PlusMinus" parent="HBoxContainer/DisplayGrid" unique_id=447090661 instance=ExtResource("2_q7m15")]
+layout_mode = 2
+
+[node name="Data2SevenSegment1" parent="HBoxContainer/DisplayGrid" unique_id=1259704171 instance=ExtResource("1_k8x3g")]
+layout_mode = 2
+
+[node name="Data2SevenSegment2" parent="HBoxContainer/DisplayGrid" unique_id=2104961851 instance=ExtResource("1_k8x3g")]
+layout_mode = 2
+
+[node name="Data2SevenSegment3" parent="HBoxContainer/DisplayGrid" unique_id=450599151 instance=ExtResource("1_k8x3g")]
+layout_mode = 2
+
+[node name="Data2SevenSegment4" parent="HBoxContainer/DisplayGrid" unique_id=72167720 instance=ExtResource("1_k8x3g")]
+layout_mode = 2
+
+[node name="Data2SevenSegment5" parent="HBoxContainer/DisplayGrid" unique_id=864584408 instance=ExtResource("1_k8x3g")]
+layout_mode = 2
+
+[node name="Data2SevenSegment6" parent="HBoxContainer/DisplayGrid" unique_id=1767792512 instance=ExtResource("1_k8x3g")]
+layout_mode = 2
+
+[node name="Data3PlusMinus" parent="HBoxContainer/DisplayGrid" unique_id=1257109777 instance=ExtResource("2_q7m15")]
+layout_mode = 2
+
+[node name="Data3SevenSegment1" parent="HBoxContainer/DisplayGrid" unique_id=1421255712 instance=ExtResource("1_k8x3g")]
+layout_mode = 2
+
+[node name="Data3SevenSegment2" parent="HBoxContainer/DisplayGrid" unique_id=1980832526 instance=ExtResource("1_k8x3g")]
+layout_mode = 2
+
+[node name="Data3SevenSegment3" parent="HBoxContainer/DisplayGrid" unique_id=183259367 instance=ExtResource("1_k8x3g")]
+layout_mode = 2
+
+[node name="Data3SevenSegment4" parent="HBoxContainer/DisplayGrid" unique_id=453353739 instance=ExtResource("1_k8x3g")]
+layout_mode = 2
+
+[node name="Data3SevenSegment5" parent="HBoxContainer/DisplayGrid" unique_id=800227794 instance=ExtResource("1_k8x3g")]
+layout_mode = 2
+
+[node name="Data3SevenSegment6" parent="HBoxContainer/DisplayGrid" unique_id=1212051372 instance=ExtResource("1_k8x3g")]
+layout_mode = 2
+
+[node name="Blank3" type="PanelContainer" parent="HBoxContainer/DisplayGrid" unique_id=344003734]
+custom_minimum_size = Vector2(30, 40)
+layout_mode = 2
+
+[node name="Data1ModifiedLight" parent="HBoxContainer/DisplayGrid" unique_id=1229390156 instance=ExtResource("3_hfqs4")]
+layout_mode = 2
+
+[node name="Blank4" type="PanelContainer" parent="HBoxContainer/DisplayGrid" unique_id=922741417]
+custom_minimum_size = Vector2(30, 40)
+layout_mode = 2
+
+[node name="Data2ModifiedLight" parent="HBoxContainer/DisplayGrid" unique_id=1030421230 instance=ExtResource("3_hfqs4")]
+layout_mode = 2
+
+[node name="Blank5" type="PanelContainer" parent="HBoxContainer/DisplayGrid" unique_id=1858288753]
+custom_minimum_size = Vector2(30, 40)
+layout_mode = 2
+
+[node name="Data3ModifiedLight" parent="HBoxContainer/DisplayGrid" unique_id=1931822311 instance=ExtResource("3_hfqs4")]
+layout_mode = 2
+
+[node name="Blank6" type="PanelContainer" parent="HBoxContainer/DisplayGrid" unique_id=981706727]
+custom_minimum_size = Vector2(30, 40)
+layout_mode = 2

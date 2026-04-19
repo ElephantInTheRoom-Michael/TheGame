@@ -3,6 +3,8 @@
 [ext_resource type="Script" uid="uid://c0khytb01keo7" path="res://LocationComputer.cs" id="1_elp3y"]
 [ext_resource type="Script" uid="uid://gtpduxu7mp1w" path="res://TerminalComputer.cs" id="1_w5r8j"]
 [ext_resource type="Script" uid="uid://c3npbykcyddtb" path="res://RcsComputer.cs" id="3_3qy4n"]
+[ext_resource type="PackedScene" uid="uid://dw41n63m6vp14" path="res://parts/interfaces/dsky/display_keyboard.tscn" id="4_5a7bt"]
+[ext_resource type="PackedScene" uid="uid://cmx0y12gv6j71" path="res://parts/interfaces/dsky/dsky_interface.tscn" id="5_hwpm1"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_yp4n1"]
 size = Vector2(50, 50)
@@ -45,6 +47,8 @@ wait_time = 5.0
 one_shot = true
 autostart = true
 
+[node name="DisplayKeyboard" parent="." unique_id=1214519681 instance=ExtResource("4_5a7bt")]
+
 [node name="CanvasLayer" type="CanvasLayer" parent="." unique_id=1091152427]
 
 [node name="VBoxContainer" type="VBoxContainer" parent="CanvasLayer" unique_id=150530038]
@@ -77,6 +81,8 @@ vertical_alignment = 2
 
 [node name="LineEdit" type="LineEdit" parent="CanvasLayer/VBoxContainer" unique_id=1042612281]
 layout_mode = 2
+
+[node name="DskyInterface" parent="." unique_id=1410098241 instance=ExtResource("5_hwpm1")]
 
 [connection signal="Location" from="Ship/LocationComputer" to="Ship/TerminalComputer" method="OnDataInput"]
 [connection signal="VelocityDirection" from="Ship/LocationComputer" to="Ship/RcsComputer" method="OnVelocityDirectionReceived"]

@@ -1,0 +1,14 @@
+[gd_scene format=3 uid="uid://bkr713b0bdbe3"]
+
+[node name="PlusMinus" type="Panel" unique_id=1757885893]
+custom_minimum_size = Vector2(30, 40)
+offset_right = 30.0
+offset_bottom = 40.0
+
+[node name="MinusLine" type="Line2D" parent="." unique_id=1660773294]
+points = PackedVector2Array(5, 20, 25, 20)
+width = 1.0
+
+[node name="PlusLine" type="Line2D" parent="." unique_id=1133173089]
+points = PackedVector2Array(15, 10, 15, 30)
+width = 1.0
