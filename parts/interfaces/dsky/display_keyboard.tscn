@@ -1,3 +1,6 @@
 [gd_scene format=3 uid="uid://dw41n63m6vp14"]
 
+[ext_resource type="Script" uid="uid://buv3v66qs4vri" path="res://parts/interfaces/dsky/DisplayKeyboard.cs" id="1_ymw3p"]
+
 [node name="DisplayKeyboard" type="Node2D" unique_id=1214519681]
+script = ExtResource("1_ymw3p")

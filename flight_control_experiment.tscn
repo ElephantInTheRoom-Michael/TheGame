@@ -1,7 +1,6 @@
 [gd_scene format=3 uid="uid://xdx8qdpqusv1"]
 
 [ext_resource type="Script" uid="uid://c0khytb01keo7" path="res://LocationComputer.cs" id="1_elp3y"]
-[ext_resource type="Script" uid="uid://gtpduxu7mp1w" path="res://TerminalComputer.cs" id="1_w5r8j"]
 [ext_resource type="Script" uid="uid://c3npbykcyddtb" path="res://RcsComputer.cs" id="3_3qy4n"]
 [ext_resource type="PackedScene" uid="uid://dw41n63m6vp14" path="res://parts/interfaces/dsky/display_keyboard.tscn" id="4_5a7bt"]
 [ext_resource type="PackedScene" uid="uid://cmx0y12gv6j71" path="res://parts/interfaces/dsky/dsky_interface.tscn" id="5_hwpm1"]
@@ -19,13 +18,10 @@ offset = Vector2(-25, -25)
 polygon = PackedVector2Array(0, 0, 50, 0, 50, 50, 0, 50)
 
 [node name="Camera2D" type="Camera2D" parent="Ship" unique_id=291692731]
+offset = Vector2(100, -80)
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Ship" unique_id=702091631]
 shape = SubResource("RectangleShape2D_yp4n1")
-
-[node name="TerminalComputer" type="Node2D" parent="Ship" unique_id=646404686 node_paths=PackedStringArray("_output")]
-script = ExtResource("1_w5r8j")
-_output = NodePath("../../CanvasLayer/VBoxContainer/PanelContainer/RichTextLabel")
 
 [node name="LocationComputer" type="Node2D" parent="Ship" unique_id=1068400681 node_paths=PackedStringArray("_ship")]
 script = ExtResource("1_elp3y")
@@ -47,44 +43,11 @@ wait_time = 5.0
 one_shot = true
 autostart = true
 
-[node name="DisplayKeyboard" parent="." unique_id=1214519681 instance=ExtResource("4_5a7bt")]
-
-[node name="CanvasLayer" type="CanvasLayer" parent="." unique_id=1091152427]
-
-[node name="VBoxContainer" type="VBoxContainer" parent="CanvasLayer" unique_id=150530038]
-anchors_preset = 12
-anchor_top = 1.0
-anchor_right = 1.0
-anchor_bottom = 1.0
-offset_top = -35.0
-grow_horizontal = 2
-grow_vertical = 0
-
-[node name="HBoxContainer" type="HBoxContainer" parent="CanvasLayer/VBoxContainer" unique_id=438372981]
-layout_mode = 2
-
-[node name="Button" type="Button" parent="CanvasLayer/VBoxContainer/HBoxContainer" unique_id=373870104]
-layout_mode = 2
-disabled = true
-text = "Terminate Command"
-
-[node name="PanelContainer" type="PanelContainer" parent="CanvasLayer/VBoxContainer" unique_id=1520794605]
-layout_mode = 2
-
-[node name="RichTextLabel" type="RichTextLabel" parent="CanvasLayer/VBoxContainer/PanelContainer" unique_id=1831689403]
-custom_minimum_size = Vector2(0, 200)
-layout_mode = 2
-bbcode_enabled = true
-text = "Hello[br]"
-scroll_following = true
-vertical_alignment = 2
-
-[node name="LineEdit" type="LineEdit" parent="CanvasLayer/VBoxContainer" unique_id=1042612281]
-layout_mode = 2
+[node name="DisplayKeyboard" parent="." unique_id=1214519681 node_paths=PackedStringArray("Interface") instance=ExtResource("4_5a7bt")]
+Interface = NodePath("../DskyInterface")
 
 [node name="DskyInterface" parent="." unique_id=1410098241 instance=ExtResource("5_hwpm1")]
 
-[connection signal="Location" from="Ship/LocationComputer" to="Ship/TerminalComputer" method="OnDataInput"]
 [connection signal="VelocityDirection" from="Ship/LocationComputer" to="Ship/RcsComputer" method="OnVelocityDirectionReceived"]
 [connection signal="timeout" from="Ship/LocationComputer/Timer" to="Ship/LocationComputer" method="OnTimerTimeout"]
 [connection signal="timeout" from="Ship/RcsComputer/StartHoldingProgradeTimer" to="Ship/RcsComputer" method="HoldPrograde"]

@@ -1,10 +1,14 @@
 [gd_scene format=3 uid="uid://cmx0y12gv6j71"]
 
 [ext_resource type="PackedScene" uid="uid://jt4ef4d6pox0" path="res://parts/interfaces/dsky/seven_segment.tscn" id="1_k8x3g"]
+[ext_resource type="Script" uid="uid://bsfoo8fb388h" path="res://parts/interfaces/dsky/DskyInterface.cs" id="1_kag50"]
 [ext_resource type="PackedScene" uid="uid://bkr713b0bdbe3" path="res://parts/interfaces/dsky/plus_minus.tscn" id="2_q7m15"]
 [ext_resource type="PackedScene" uid="uid://clh3c41tmmxw3" path="res://parts/interfaces/dsky/modified_light.tscn" id="3_hfqs4"]
 
-[node name="DskyInterface" type="CanvasLayer" unique_id=1410098241]
+[node name="DskyInterface" type="CanvasLayer" unique_id=1410098241 node_paths=PackedStringArray("Display", "Keyboard")]
+script = ExtResource("1_kag50")
+Display = NodePath("HBoxContainer/DisplayGrid")
+Keyboard = NodePath("HBoxContainer/ButtonGrid")
 
 [node name="HBoxContainer" type="HBoxContainer" parent="." unique_id=63330487]
 anchors_preset = 1
@@ -22,6 +26,7 @@ columns = 4
 [node name="ErrorButton" type="Button" parent="HBoxContainer/ButtonGrid" unique_id=2074576436]
 custom_minimum_size = Vector2(80, 40)
 layout_mode = 2
+disabled = true
 text = "Error"
 
 [node name="ResetButton" type="Button" parent="HBoxContainer/ButtonGrid" unique_id=1094511242]
@@ -37,17 +42,20 @@ text = "Target"
 [node name="ProgramButton" type="Button" parent="HBoxContainer/ButtonGrid" unique_id=1300119290]
 custom_minimum_size = Vector2(80, 40)
 layout_mode = 2
+disabled = true
 text = "Prog"
 
 [node name="RevertButton" type="Button" parent="HBoxContainer/ButtonGrid" unique_id=37533276]
 custom_minimum_size = Vector2(80, 40)
 layout_mode = 2
+disabled = true
 text = "Revert
 "
 
 [node name="ClearButton" type="Button" parent="HBoxContainer/ButtonGrid" unique_id=332094707]
 custom_minimum_size = Vector2(80, 40)
 layout_mode = 2
+disabled = true
 text = "Clear"
 
 [node name="VerbButton" type="Button" parent="HBoxContainer/ButtonGrid" unique_id=1856131399]
@@ -75,7 +83,7 @@ custom_minimum_size = Vector2(80, 40)
 layout_mode = 2
 text = "9"
 
-[node name="LineButton1" type="Button" parent="HBoxContainer/ButtonGrid" unique_id=556510783]
+[node name="DataButton1" type="Button" parent="HBoxContainer/ButtonGrid" unique_id=556510783]
 custom_minimum_size = Vector2(80, 40)
 layout_mode = 2
 text = "-->"
@@ -95,7 +103,7 @@ custom_minimum_size = Vector2(80, 40)
 layout_mode = 2
 text = "6"
 
-[node name="LineButton2" type="Button" parent="HBoxContainer/ButtonGrid" unique_id=1864221093]
+[node name="DataButton2" type="Button" parent="HBoxContainer/ButtonGrid" unique_id=1864221093]
 custom_minimum_size = Vector2(80, 40)
 layout_mode = 2
 text = "-->"
@@ -115,7 +123,7 @@ custom_minimum_size = Vector2(80, 40)
 layout_mode = 2
 text = "3"
 
-[node name="LineButton3" type="Button" parent="HBoxContainer/ButtonGrid" unique_id=443636900]
+[node name="DataButton3" type="Button" parent="HBoxContainer/ButtonGrid" unique_id=443636900]
 custom_minimum_size = Vector2(80, 40)
 layout_mode = 2
 text = "-->"
@@ -123,6 +131,7 @@ text = "-->"
 [node name="PlusButton" type="Button" parent="HBoxContainer/ButtonGrid" unique_id=804837751]
 custom_minimum_size = Vector2(80, 40)
 layout_mode = 2
+disabled = true
 text = "+"
 
 [node name="Button0" type="Button" parent="HBoxContainer/ButtonGrid" unique_id=1365965059]
@@ -133,11 +142,13 @@ text = "0"
 [node name="MinusButton" type="Button" parent="HBoxContainer/ButtonGrid" unique_id=537731578]
 custom_minimum_size = Vector2(80, 40)
 layout_mode = 2
+disabled = true
 text = "-"
 
 [node name="CommitButton" type="Button" parent="HBoxContainer/ButtonGrid" unique_id=965175535]
 custom_minimum_size = Vector2(80, 40)
 layout_mode = 2
+disabled = true
 text = "Commit
 "
 
@@ -182,33 +193,42 @@ layout_mode = 2
 
 [node name="NounSevenSegment1" parent="HBoxContainer/DisplayGrid" unique_id=1290880397 instance=ExtResource("1_k8x3g")]
 layout_mode = 2
+Digit = 7
 
 [node name="NounSevenSegment2" parent="HBoxContainer/DisplayGrid" unique_id=1710852124 instance=ExtResource("1_k8x3g")]
 layout_mode = 2
+Digit = 8
 
 [node name="NounSevenSegment3" parent="HBoxContainer/DisplayGrid" unique_id=808082041 instance=ExtResource("1_k8x3g")]
 layout_mode = 2
+Digit = 9
 
 [node name="Data1PlusMinus" parent="HBoxContainer/DisplayGrid" unique_id=2040494475 instance=ExtResource("2_q7m15")]
 layout_mode = 2
 
 [node name="Data1SevenSegment1" parent="HBoxContainer/DisplayGrid" unique_id=1919656479 instance=ExtResource("1_k8x3g")]
 layout_mode = 2
+Digit = 1
 
 [node name="Data1SevenSegment2" parent="HBoxContainer/DisplayGrid" unique_id=2095233360 instance=ExtResource("1_k8x3g")]
 layout_mode = 2
+Digit = 2
 
 [node name="Data1SevenSegment3" parent="HBoxContainer/DisplayGrid" unique_id=1543648217 instance=ExtResource("1_k8x3g")]
 layout_mode = 2
+Digit = 3
 
 [node name="Data1SevenSegment4" parent="HBoxContainer/DisplayGrid" unique_id=182735542 instance=ExtResource("1_k8x3g")]
 layout_mode = 2
+Digit = 4
 
 [node name="Data1SevenSegment5" parent="HBoxContainer/DisplayGrid" unique_id=1331601662 instance=ExtResource("1_k8x3g")]
 layout_mode = 2
+Digit = 5
 
 [node name="Data1SevenSegment6" parent="HBoxContainer/DisplayGrid" unique_id=631743880 instance=ExtResource("1_k8x3g")]
 layout_mode = 2
+Digit = 6
 
 [node name="Data2PlusMinus" parent="HBoxContainer/DisplayGrid" unique_id=447090661 instance=ExtResource("2_q7m15")]
 layout_mode = 2
