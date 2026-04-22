@@ -8,10 +8,49 @@ public partial class DisplayKeyboard : Node2D
     [Export]
     public DskyInterface Interface { get; set; }
 
-    public int Target { get; private set; }
-    public int Program { get; set; }
-    public int Verb { get; private set; }
-    public int Noun { get; private set; }
+    public int Target
+    {
+        get => _target;
+        private set
+        {
+            _target = value;
+            GD.Print($"Target is set to {_target}");
+            ShowNumber(_target, 3, "Target");
+        }
+    }
+
+    public int Program
+    {
+        get => _program;
+        set
+        {
+            _program = value;
+            GD.Print($"Program is set to {_program}");
+            ShowNumber(_program, 3, "Program");
+        } 
+    }
+
+    public int Verb
+    {
+        get => _verb;
+        private set
+        {
+            _verb = value;
+            GD.Print($"Verb is set to {_verb}");
+            ShowNumber(_verb, 3, "Verb");
+        }
+    }
+
+    public int Noun
+    {
+        get => _noun;
+        private set
+        {
+            _noun = value;
+            GD.Print($"Noun is set to {_noun}");
+            ShowNumber(_noun, 3, "Noun");
+        }
+    }
 
     public Vector3I Data
     {
@@ -24,6 +63,10 @@ public partial class DisplayKeyboard : Node2D
         }
     }
     
+    private int _target;
+    private int _program;
+    private int _verb;
+    private int _noun;
     private Vector3I _data = Vector3I.Zero;
 
     private int DataOne
@@ -32,25 +75,28 @@ public partial class DisplayKeyboard : Node2D
         set
         {
             _data.X = value;
-            ShowData(0);
+            GD.Print($"Data1 is set to {_data.X}");
+            ShowNumber(_data.X, 6, "Data1");
         }
     }
     private int DataTwo
     {
-        get => _data.X;
+        get => _data.Y;
         set
         {
-            _data.X = value;
-            ShowData(1);
+            _data.Y = value;
+            GD.Print($"Data2 is set to {_data.Y}");
+            ShowNumber(_data.Y, 6, "Data2");
         }
     }
     private int DataThree
     {
-        get => _data.X;
+        get => _data.Z;
         set
         {
-            _data.X = value;
-            ShowData(2);
+            _data.Z = value;
+            GD.Print($"Data3 is set to {_data.Z}");
+            ShowNumber(_data.Z, 6, "Data3");
         }
     }
 
@@ -114,8 +160,6 @@ public partial class DisplayKeyboard : Node2D
             2 => n => DataThree = UpdateLongNumber(DataThree, n),
             _ => EmptyUpdateNumber
         };
-
-        _updateNumber(0);
     }
 
     private void OnNumberKey(int n)
@@ -134,11 +178,6 @@ public partial class DisplayKeyboard : Node2D
         Data = Vector3I.Zero;
         _updateNumber = EmptyUpdateNumber;
     }
-    
-    private void UpdateTarget(int n)
-    {
-        Target = (Target * 10) + n;
-    }
 
     private int UpdateShortNumber(int number, int n)
     {
@@ -150,14 +189,14 @@ public partial class DisplayKeyboard : Node2D
         return ((number * 10) + n) % 1000000;
     }
     
-    private void ShowData(int i)
+    private void ShowNumber(int n, int digits, String sevenSegmentName)
     {
-        var remaining = _data[i];
-        for (var d = 6; d > 0; d--)
+        var remaining = n;
+        for (var d = digits; d > 0; d--)
         {
             var digit = remaining % 10;
             remaining /= 10;
-            Interface.Display.GetNode<SevenSegment>($"Data{i + 1}SevenSegment{d}").Digit = digit;
+            Interface.Display.GetNode<SevenSegment>($"{sevenSegmentName}SevenSegment{d}").Digit = digit;
         }
     }
 }
