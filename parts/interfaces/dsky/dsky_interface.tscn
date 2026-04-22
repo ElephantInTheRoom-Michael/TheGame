@@ -131,7 +131,6 @@ text = "-->"
 [node name="PlusButton" type="Button" parent="HBoxContainer/ButtonGrid" unique_id=804837751]
 custom_minimum_size = Vector2(80, 40)
 layout_mode = 2
-disabled = true
 text = "+"
 
 [node name="Button0" type="Button" parent="HBoxContainer/ButtonGrid" unique_id=1365965059]
@@ -142,7 +141,6 @@ text = "0"
 [node name="MinusButton" type="Button" parent="HBoxContainer/ButtonGrid" unique_id=537731578]
 custom_minimum_size = Vector2(80, 40)
 layout_mode = 2
-disabled = true
 text = "-"
 
 [node name="CommitButton" type="Button" parent="HBoxContainer/ButtonGrid" unique_id=965175535]

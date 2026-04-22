@@ -1,9 +1,12 @@
 [gd_scene format=3 uid="uid://bkr713b0bdbe3"]
 
+[ext_resource type="Script" uid="uid://cm1337v0fvfa2" path="res://parts/interfaces/dsky/PlusMinus.cs" id="1_ine2j"]
+
 [node name="PlusMinus" type="Panel" unique_id=1757885893]
 custom_minimum_size = Vector2(30, 40)
 offset_right = 30.0
 offset_bottom = 40.0
+script = ExtResource("1_ine2j")
 
 [node name="MinusLine" type="Line2D" parent="." unique_id=1660773294]
 points = PackedVector2Array(5, 20, 25, 20)

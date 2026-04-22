@@ -77,6 +77,7 @@ public partial class DisplayKeyboard : Node2D
             _data.X = value;
             GD.Print($"Data1 is set to {_data.X}");
             ShowNumber(_data.X, 6, "Data1");
+            ShowSign(_data.X, "Data1");
         }
     }
     private int DataTwo
@@ -87,6 +88,7 @@ public partial class DisplayKeyboard : Node2D
             _data.Y = value;
             GD.Print($"Data2 is set to {_data.Y}");
             ShowNumber(_data.Y, 6, "Data2");
+            ShowSign(_data.Y, "Data2");
         }
     }
     private int DataThree
@@ -97,11 +99,16 @@ public partial class DisplayKeyboard : Node2D
             _data.Z = value;
             GD.Print($"Data3 is set to {_data.Z}");
             ShowNumber(_data.Z, 6, "Data3");
+            ShowSign(_data.Z, "Data3");
         }
     }
 
     private static readonly Action<int> EmptyUpdateNumber = _ => { };
     private Action<int> _updateNumber = EmptyUpdateNumber;
+    private static readonly Action<int> NoSignChange = _ => { };
+    private Action<int> _updateSign = NoSignChange;
+    
+    private bool _negativeZero = false;
 
     public override void _Ready()
     {
@@ -110,6 +117,8 @@ public partial class DisplayKeyboard : Node2D
             var buttonIndex = i;
             Interface.Keyboard.GetNode<Button>($"Button{buttonIndex}").Pressed += () => OnNumberKey(buttonIndex);
         }
+        Interface.Keyboard.GetNode<Button>("PlusButton").Pressed += () => OnSignChange(1);
+        Interface.Keyboard.GetNode<Button>("MinusButton").Pressed += () => OnSignChange(-1);
         
         for (var i = 0; i < 3; i++)
         {
@@ -134,6 +143,7 @@ public partial class DisplayKeyboard : Node2D
         Verb = 0;
         Noun = 0;
         _updateNumber = n => Target = UpdateShortNumber(Target, n);
+        _updateSign = NoSignChange;
     }
 
     private void OnVerbEntryStart()
@@ -141,6 +151,7 @@ public partial class DisplayKeyboard : Node2D
         GD.Print("Verb entry started");
         Verb = 0;
         _updateNumber = n => Verb = UpdateShortNumber(Verb, n);
+        _updateSign = NoSignChange;
     }
     
     private void OnNounEntryStart()
@@ -148,11 +159,20 @@ public partial class DisplayKeyboard : Node2D
         GD.Print("Noun entry started");
         Noun = 0;
         _updateNumber = n => Noun = UpdateShortNumber(Noun, n);
+        _updateSign = NoSignChange;
     }
     
     private void OnDataEntryStart(int i)
     {
         GD.Print($"Data {i + 1} entry started");
+        
+        // If the user pressed minus on the previous number but did not update it further, the negative zero is not
+        // saved. Reset the negative zero flag and refresh the number display to remove the minus sign.
+        if (_negativeZero)
+        {
+            _updateSign(1);
+        }
+        
         _updateNumber = i switch
         {
             0 => n => DataOne = UpdateLongNumber(DataOne, n),
@@ -160,12 +180,25 @@ public partial class DisplayKeyboard : Node2D
             2 => n => DataThree = UpdateLongNumber(DataThree, n),
             _ => EmptyUpdateNumber
         };
+        _updateSign = i switch
+        {
+            0 => polarity => DataOne = UpdateSign(DataOne, polarity),
+            1 => polarity => DataTwo = UpdateSign(DataTwo, polarity),
+            2 => polarity => DataThree = UpdateSign(DataThree, polarity),
+            _ => NoSignChange
+        };
     }
 
     private void OnNumberKey(int n)
     {
         GD.Print($"Number key pressed: {n}");
         _updateNumber(n);
+    }
+    
+    private void OnSignChange(int polarity)
+    {
+        GD.Print("Sign change");
+        _updateSign(polarity);
     }
 
     private void Reset()
@@ -177,26 +210,60 @@ public partial class DisplayKeyboard : Node2D
         Noun = 0;
         Data = Vector3I.Zero;
         _updateNumber = EmptyUpdateNumber;
+        _updateSign = NoSignChange;
+        _negativeZero = false;
+    }
+
+    private int UpdateNumber(int number, int n, int digits)
+    {
+        var polarity = number < 0 ? -1 : 1;
+        if (number == 0 && _negativeZero && n != 0)
+        {
+            polarity = -1;
+            _negativeZero = false;
+        }
+        var result = (((Math.Abs(number) * 10) + n) % (int) Math.Pow(10, digits)) * polarity;
+        if (result == 0 && polarity < 0)
+        {
+            _negativeZero = true;
+        }
+        return result;
     }
 
     private int UpdateShortNumber(int number, int n)
     {
-        return ((number * 10) + n) % 1000;
+        return UpdateNumber(number, n, 3);
     }
     
     private int UpdateLongNumber(int number, int n)
     {
-        return ((number * 10) + n) % 1000000;
+        return UpdateNumber(number, n, 6);
+    }
+
+    private int UpdateSign(int number, int polarity)
+    {
+        if (number == 0)
+        {
+            _negativeZero = polarity < 0;
+            return 0;
+        }
+        return Math.Abs(number) * polarity;
     }
     
     private void ShowNumber(int n, int digits, String sevenSegmentName)
     {
-        var remaining = n;
+        var remaining = Math.Abs(n);
         for (var d = digits; d > 0; d--)
         {
             var digit = remaining % 10;
             remaining /= 10;
             Interface.Display.GetNode<SevenSegment>($"{sevenSegmentName}SevenSegment{d}").Digit = digit;
         }
+    }
+    
+    private void ShowSign(int n, String plusMinusName)
+    {
+        var polarity = n == 0 && _negativeZero ? -1 : n;
+        Interface.Display.GetNode<PlusMinus>($"{plusMinusName}PlusMinus").Polarity = polarity;
     }
 }
