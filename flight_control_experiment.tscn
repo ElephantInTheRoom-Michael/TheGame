@@ -4,7 +4,7 @@
 [ext_resource type="Script" uid="uid://c3npbykcyddtb" path="res://RcsComputer.cs" id="3_3qy4n"]
 [ext_resource type="PackedScene" uid="uid://dw41n63m6vp14" path="res://parts/interfaces/dsky/display_keyboard.tscn" id="4_5a7bt"]
 [ext_resource type="PackedScene" uid="uid://bym0aelu0stbi" path="res://parts/interfaces/dsky/dsky_data_bus.tscn" id="5_5a7bt"]
-[ext_resource type="PackedScene" uid="uid://cmx0y12gv6j71" path="res://parts/interfaces/dsky/dsky_interface.tscn" id="5_hwpm1"]
+[ext_resource type="PackedScene" uid="uid://cmx0y12gv6j71" path="res://parts/interfaces/dsky/dsky_ui.tscn" id="5_hwpm1"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_yp4n1"]
 size = Vector2(50, 50)
@@ -46,10 +46,10 @@ one_shot = true
 autostart = true
 
 [node name="DisplayKeyboard" parent="." unique_id=1214519681 node_paths=PackedStringArray("Interface", "DataBus") instance=ExtResource("4_5a7bt")]
-Interface = NodePath("../DskyInterface")
+Interface = NodePath("../DskyUI")
 DataBus = NodePath("../DskyDataBus")
 
-[node name="DskyInterface" parent="." unique_id=1410098241 instance=ExtResource("5_hwpm1")]
+[node name="DskyUI" parent="." unique_id=1410098241 instance=ExtResource("5_hwpm1")]
 
 [node name="DskyDataBus" parent="." unique_id=276832348 instance=ExtResource("5_5a7bt")]
 
