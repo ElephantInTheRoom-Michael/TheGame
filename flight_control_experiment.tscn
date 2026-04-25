@@ -3,6 +3,7 @@
 [ext_resource type="Script" uid="uid://c0khytb01keo7" path="res://LocationComputer.cs" id="1_elp3y"]
 [ext_resource type="Script" uid="uid://c3npbykcyddtb" path="res://RcsComputer.cs" id="3_3qy4n"]
 [ext_resource type="PackedScene" uid="uid://dw41n63m6vp14" path="res://parts/interfaces/dsky/display_keyboard.tscn" id="4_5a7bt"]
+[ext_resource type="PackedScene" uid="uid://bym0aelu0stbi" path="res://parts/interfaces/dsky/dsky_data_bus.tscn" id="5_5a7bt"]
 [ext_resource type="PackedScene" uid="uid://cmx0y12gv6j71" path="res://parts/interfaces/dsky/dsky_interface.tscn" id="5_hwpm1"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_yp4n1"]
@@ -34,19 +35,23 @@ polygon = PackedVector2Array(0, 0, 5, 15, -5, 15)
 [node name="Timer" type="Timer" parent="Ship/LocationComputer" unique_id=1747387579]
 autostart = true
 
-[node name="RcsComputer" type="Node2D" parent="Ship" unique_id=717340213 node_paths=PackedStringArray("_ship")]
+[node name="RcsComputer" type="Node2D" parent="Ship" unique_id=717340213 node_paths=PackedStringArray("_ship", "_dskyDataBus")]
 script = ExtResource("3_3qy4n")
 _ship = NodePath("..")
+_dskyDataBus = NodePath("../../DskyDataBus")
 
 [node name="StartHoldingProgradeTimer" type="Timer" parent="Ship/RcsComputer" unique_id=194398996]
 wait_time = 5.0
 one_shot = true
 autostart = true
 
-[node name="DisplayKeyboard" parent="." unique_id=1214519681 node_paths=PackedStringArray("Interface") instance=ExtResource("4_5a7bt")]
+[node name="DisplayKeyboard" parent="." unique_id=1214519681 node_paths=PackedStringArray("Interface", "DataBus") instance=ExtResource("4_5a7bt")]
 Interface = NodePath("../DskyInterface")
+DataBus = NodePath("../DskyDataBus")
 
 [node name="DskyInterface" parent="." unique_id=1410098241 instance=ExtResource("5_hwpm1")]
+
+[node name="DskyDataBus" parent="." unique_id=276832348 instance=ExtResource("5_5a7bt")]
 
 [connection signal="VelocityDirection" from="Ship/LocationComputer" to="Ship/RcsComputer" method="OnVelocityDirectionReceived"]
 [connection signal="timeout" from="Ship/LocationComputer/Timer" to="Ship/LocationComputer" method="OnTimerTimeout"]

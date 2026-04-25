@@ -7,6 +7,8 @@ public partial class DisplayKeyboard : Node2D
 {
     [Export]
     public DskyInterface Interface { get; set; }
+    [Export]
+    public DskyDataBus DataBus { get; set; }
 
     public int Target
     {
@@ -16,6 +18,7 @@ public partial class DisplayKeyboard : Node2D
             _target = value;
             GD.Print($"Target is set to {_target}");
             ShowNumber(_target, 3, "Target");
+            DataBus.Target = _target;
         }
     }
 

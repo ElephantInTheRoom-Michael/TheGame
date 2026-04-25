@@ -1,0 +1,6 @@
+[gd_scene format=3 uid="uid://bym0aelu0stbi"]
+
+[ext_resource type="Script" uid="uid://b17qevn5eb25r" path="res://parts/interfaces/dsky/DskyDataBus.cs" id="1_0fbuo"]
+
+[node name="DskyDataBus" type="Node" unique_id=276832348]
+script = ExtResource("1_0fbuo")
