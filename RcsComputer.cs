@@ -5,27 +5,26 @@ namespace TheGame;
 
 public partial class RcsComputer : Node2D
 {
-    [Export]
-    private RigidBody2D _ship;
-    [Export]
-    private DskyDataBus _dskyDataBus;
-    
+    [Export] private RigidBody2D _ship;
+    [Export] private DskyDataBus _dskyDataBus;
+
     private bool _holdPrograde = false;
-    
+
     private int _dskyTarget = 10;
 
     public override void _Ready()
     {
         base._Ready();
-        
+
         _dskyDataBus.TargetChanged += OnDskyTargetChanged;
+        _dskyDataBus.ProgramBeginWrite += WriteProgram;
     }
 
     private void HoldPrograde()
     {
         _holdPrograde = true;
     }
-    
+
     private void OnVelocityDirectionReceived(double direction)
     {
         if (_holdPrograde)
@@ -34,12 +33,20 @@ public partial class RcsComputer : Node2D
             _ship.GlobalRotation = direction;
         }
     }
-    
+
     private void OnDskyTargetChanged(int target)
     {
         if (target == _dskyTarget)
         {
             GD.Print("Dsky target is me");
+        }
+    }
+
+    private void WriteProgram()
+    {
+        if (_dskyDataBus.Target == _dskyTarget)
+        {
+            _dskyDataBus.Program = _holdPrograde ? 1 : 0;
         }
     }
 }

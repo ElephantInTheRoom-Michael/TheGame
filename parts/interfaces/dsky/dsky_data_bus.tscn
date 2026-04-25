@@ -4,3 +4,9 @@
 
 [node name="DskyDataBus" type="Node" unique_id=276832348]
 script = ExtResource("1_0fbuo")
+
+[node name="Clock" type="Timer" parent="." unique_id=153971129]
+wait_time = 0.25
+autostart = true
+
+[connection signal="timeout" from="Clock" to="." method="OnClockTick"]

@@ -18,7 +18,6 @@ public partial class DisplayKeyboard : Node2D
             _target = value;
             GD.Print($"Target is set to {_target}");
             ShowNumber(_target, 3, "Target");
-            DataBus.Target = _target;
         }
     }
 
@@ -134,6 +133,10 @@ public partial class DisplayKeyboard : Node2D
         Interface.Keyboard.GetNode<Button>("NounButton").Pressed += OnNounEntryStart;
         
         Interface.Keyboard.GetNode<Button>("ResetButton").Pressed += Reset;
+        
+        DataBus.TargetBeginWrite += () => DataBus.Target = Target;
+        
+        DataBus.ProgramChanged += p => Program = p;
         
         Reset();
     }
