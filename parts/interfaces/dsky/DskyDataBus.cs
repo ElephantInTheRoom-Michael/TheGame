@@ -1,3 +1,5 @@
+using System.Collections;
+using System.Collections.Generic;
 using Godot;
 
 namespace TheGame.parts.interfaces.dsky;
@@ -14,8 +16,11 @@ public partial class DskyDataBus : Node
     [Signal]
     public delegate void ProgramChangedEventHandler(int program);
     
+    [Signal]
+    public delegate void ErrorChangedEventHandler(bool error);
+    
     public int Clock { get; private set; }
-
+    
     public int Target
     {
         get => _target;
@@ -38,8 +43,24 @@ public partial class DskyDataBus : Node
         }
     }
 
+    public bool Error => ErrorTargets.HasAnySet();
+
+
     private int _target;
     private int _program;
+    private BitArray ErrorTargets { get; } = new(256);
+    
+    public void AddTargetError(int target)
+    {
+        ErrorTargets[target] = true;
+        EmitSignal(SignalName.ErrorChanged, Error);
+    }
+
+    public void RemoveTargetError(int target)
+    {
+        ErrorTargets[target] = false;
+        EmitSignal(SignalName.ErrorChanged, Error);
+    }
 
     private void OnClockTick()
     {

@@ -6,7 +6,7 @@ namespace TheGame.parts.interfaces.dsky;
 public partial class DisplayKeyboard : Node2D
 {
     [Export]
-    public DskyInterface Interface { get; set; }
+    public DskyUI UI { get; set; }
     [Export]
     public DskyDataBus DataBus { get; set; }
 
@@ -117,26 +117,27 @@ public partial class DisplayKeyboard : Node2D
         for (var i = 0; i < 10; i++)
         {
             var buttonIndex = i;
-            Interface.Keyboard.GetNode<Button>($"Button{buttonIndex}").Pressed += () => OnNumberKey(buttonIndex);
+            UI.Keyboard.GetNode<Button>($"Button{buttonIndex}").Pressed += () => OnNumberKey(buttonIndex);
         }
-        Interface.Keyboard.GetNode<Button>("PlusButton").Pressed += () => OnSignChange(1);
-        Interface.Keyboard.GetNode<Button>("MinusButton").Pressed += () => OnSignChange(-1);
+        UI.Keyboard.GetNode<Button>("PlusButton").Pressed += () => OnSignChange(1);
+        UI.Keyboard.GetNode<Button>("MinusButton").Pressed += () => OnSignChange(-1);
         
         for (var i = 0; i < 3; i++)
         {
             var dataIndex = i;
-            Interface.Keyboard.GetNode<Button>($"DataButton{dataIndex + 1}").Pressed += () => OnDataEntryStart(dataIndex);
+            UI.Keyboard.GetNode<Button>($"DataButton{dataIndex + 1}").Pressed += () => OnDataEntryStart(dataIndex);
         }
         
-        Interface.Keyboard.GetNode<Button>("TargetButton").Pressed += OnTargetEntryStart;
-        Interface.Keyboard.GetNode<Button>("VerbButton").Pressed += OnVerbEntryStart;
-        Interface.Keyboard.GetNode<Button>("NounButton").Pressed += OnNounEntryStart;
+        UI.Keyboard.GetNode<Button>("TargetButton").Pressed += OnTargetEntryStart;
+        UI.Keyboard.GetNode<Button>("VerbButton").Pressed += OnVerbEntryStart;
+        UI.Keyboard.GetNode<Button>("NounButton").Pressed += OnNounEntryStart;
         
-        Interface.Keyboard.GetNode<Button>("ResetButton").Pressed += Reset;
+        UI.Keyboard.GetNode<Button>("ResetButton").Pressed += Reset;
         
         DataBus.TargetBeginWrite += () => DataBus.Target = Target;
-        
         DataBus.ProgramChanged += p => Program = p;
+
+        DataBus.ErrorChanged += ShowError;
         
         Reset();
     }
@@ -220,6 +221,11 @@ public partial class DisplayKeyboard : Node2D
         _negativeZero = false;
     }
 
+    private void ShowError(bool error)
+    {
+        UI.Keyboard.GetNode<Button>("ErrorButton").Text = error ? "Error !!!" : "Error";
+    }
+
     private int UpdateNumber(int number, int n, int digits)
     {
         var polarity = number < 0 ? -1 : 1;
@@ -263,13 +269,13 @@ public partial class DisplayKeyboard : Node2D
         {
             var digit = remaining % 10;
             remaining /= 10;
-            Interface.Display.GetNode<SevenSegment>($"{sevenSegmentName}SevenSegment{d}").Digit = digit;
+            UI.Display.GetNode<SevenSegment>($"{sevenSegmentName}SevenSegment{d}").Digit = digit;
         }
     }
     
     private void ShowSign(int n, String plusMinusName)
     {
         var polarity = n == 0 && _negativeZero ? -1 : n;
-        Interface.Display.GetNode<PlusMinus>($"{plusMinusName}PlusMinus").Polarity = polarity;
+        UI.Display.GetNode<PlusMinus>($"{plusMinusName}PlusMinus").Polarity = polarity;
     }
 }

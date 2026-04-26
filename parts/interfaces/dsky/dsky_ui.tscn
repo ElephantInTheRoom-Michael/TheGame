@@ -1,7 +1,7 @@
 [gd_scene format=3 uid="uid://cmx0y12gv6j71"]
 
 [ext_resource type="PackedScene" uid="uid://jt4ef4d6pox0" path="res://parts/interfaces/dsky/seven_segment.tscn" id="1_k8x3g"]
-[ext_resource type="Script" uid="uid://bsfoo8fb388h" path="res://parts/interfaces/dsky/DskyInterface.cs" id="1_kag50"]
+[ext_resource type="Script" uid="uid://bsfoo8fb388h" path="res://parts/interfaces/dsky/DskyUI.cs" id="1_kag50"]
 [ext_resource type="PackedScene" uid="uid://bkr713b0bdbe3" path="res://parts/interfaces/dsky/plus_minus.tscn" id="2_q7m15"]
 [ext_resource type="PackedScene" uid="uid://clh3c41tmmxw3" path="res://parts/interfaces/dsky/modified_light.tscn" id="3_hfqs4"]
 
